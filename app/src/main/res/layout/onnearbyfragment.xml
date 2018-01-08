@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/refreshLayout"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <com.example.administrator.myonetext.myview.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/ly_head">
+
+            <!--<com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/pullToRefreshListView1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:cacheColorHint="#00000000"
+                android:divider="#19000000"
+                android:dividerHeight="4dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true" />-->
+
+            <com.example.administrator.myonetext.myview.MyListView
+                android:id="@+id/list1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#6c6c6c" />
+
+            <TextView
+                android:id="@+id/more2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="right"
+                android:text="更多" />
+
+            <com.youth.banner.Banner
+                android:id="@+id/nearby_fragment_banner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+           <!-- <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/pullToRefreshListView2"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:cacheColorHint="#00000000"
+                android:divider="#19000000"
+                android:dividerHeight="4dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true" />-->
+
+            <com.example.administrator.myonetext.myview.MyListView
+                android:id="@+id/list2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </com.example.administrator.myonetext.myview.MyScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

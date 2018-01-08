@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <RadioGroup
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home"
+            style="@style/radio_button_style"
+            android:drawableTop="@drawable/homebutton"
+            android:text="首页"
+           />
+
+        <RadioButton
+            android:id="@+id/nearby"
+            style="@style/radio_button_style"
+            android:drawableTop="@drawable/nearbybutton"
+            android:text="附近" />
+
+        <RadioButton
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/saoyisao2x" />
+
+        <RadioButton
+            android:id="@+id/order"
+            style="@style/radio_button_style"
+            android:drawableTop="@drawable/orderbutton"
+            android:text="订单" />
+
+        <RadioButton
+            android:id="@+id/my"
+            style="@style/radio_button_style"
+            android:drawableTop="@drawable/mybutton"
+            android:text="我的" />
+    </RadioGroup>
+</LinearLayout>

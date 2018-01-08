@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/refreshLayout"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <com.example.administrator.myonetext.myview.MyScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ly_head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--头部-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/sms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/nrxf3x"
+                        android:background="@drawable/round_border"/>
+                    <Button
+                        android:id="@+id/smsnum"
+                        android:text=" 3 "
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/shape" />
+                    <!--搜索布局-->
+                    <RelativeLayout
+                        android:paddingTop="3dp"
+                        android:id="@+id/rl_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                      android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/sms"
+                        android:background="@drawable/rounded_rectangle_frame">
+                        <ImageView
+                            android:id="@+id/iv_location"
+                            android:layout_width="11dp"
+                            android:layout_height="11dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/ssdw3x" />
+
+                        <ImageView
+                            android:id="@+id/iv_search"
+                            android:layout_width="11dp"
+                            android:layout_height="11dp"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/icon_search"
+                            android:layout_toRightOf="@+id/iv_location"/>
+
+                        <EditText
+                            android:id="@+id/et_search"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/iv_search"
+                            android:background="@null"
+                            android:hint="输入商家名、品类或商圈"
+                            android:maxLines="1"/>
+
+                        <ImageView
+                            android:id="@+id/voice"
+                            android:layout_width="11dp"
+                            android:layout_height="11dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/et_search"
+                            android:background="@mipmap/ssyy3x" />
+                    </RelativeLayout>
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/increase"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginRight="8dp"-->
+                        <!--android:background="@drawable/round_border"-->
+                        <!--android:src="@mipmap/nrgd3x" />-->
+                    <Button
+                        android:id="@+id/sure"
+                        android:layout_width="50sp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:textSize="10sp"
+                        android:text="搜索"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/eatfood"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/cms1"
+                    android:gravity="center_horizontal"
+                    android:text="吃美食" />
+
+                <TextView
+                    android:id="@+id/tea_market"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/sychashichang2x"
+                    android:gravity="center_horizontal"
+                    android:text="茶市场" />
+
+                <TextView
+                    android:id="@+id/buybuybuy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/symaimaimai2x"
+                    android:gravity="center_horizontal"
+                    android:text="买买买" />
+
+                <TextView
+                    android:id="@+id/whole"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/syquanbu2x"
+                    android:gravity="center_horizontal"
+                    android:text="全部" />
+
+                <TextView
+                    android:id="@+id/hui_red"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/syqiang2x"
+                    android:gravity="center_horizontal"
+                    android:text="惠红包"
+                    android:textColor="#f00" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/jrms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:paddingLeft="100dp"
+                    android:text="今日秒杀"
+                    android:textColor="#000" />
+
+                <com.bunny.view.TimeCountView
+                    android:id="@+id/hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/jrms"
+                    android:background="@drawable/textview_border"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    />
+
+                <TextView
+                    android:id="@+id/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:text="更多"
+                    android:textColor="#000" />
+            </RelativeLayout>
+            <com.example.administrator.myonetext.myview.HorizontalListView
+                android:id="@+id/a"
+                android:layout_width="match_parent"
+                android:layout_height="130dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000"
+                android:paddingTop="5dp" />
+
+            <com.example.administrator.myonetext.myview.MyListView
+                android:id="@+id/list1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000" />
+
+            <TextView
+                android:id="@+id/more2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="right"
+                android:text="更多" />
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+            <!--<com.handmark.pulltorefresh.library.PullToRefreshListView-->
+                <!--android:id="@+id/list2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="300dp"-->
+                <!--android:cacheColorHint="#00000000"-->
+                <!--android:divider="#19000000"-->
+                <!--android:dividerHeight="4dp"-->
+                <!--android:fadingEdge="none"-->
+                <!--android:fastScrollEnabled="false"-->
+                <!--android:footerDividersEnabled="false"-->
+                <!--android:headerDividersEnabled="false"-->
+                <!--android:smoothScrollbar="true" />-->
+            <com.example.administrator.myonetext.myview.MyListView
+                android:id="@+id/list2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </com.example.administrator.myonetext.myview.MyScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

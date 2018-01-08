@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.myonetext.activity.ChoseStartArriveCityActivity">
+
+    <RelativeLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_commonToolbar_back"
+            style="?attr/toolbarNavigationButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:gravity="center|left"
+            android:text="aaaaa"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/re_clickBack"
+            android:layout_width="60dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_commonToolbar_back"
+                android:layout_width="12dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:background="@mipmap/back_arrow_white" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="选择城市"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <!--<com.example.administrator.regionalselection.titlebar.CustomerToolbar-->
+    <!--android:id="@+id/titleBar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="64dp" />-->
+    <!--已选中国家-->
+    <RelativeLayout
+        android:id="@+id/re_selected_country"
+        android:layout_width="98dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/titleBar">
+
+        <TextView
+            android:id="@+id/text_selected_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="中国"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <!--分隔线-->
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/titleBar"
+        android:layout_toRightOf="@id/re_selected_country"
+        android:background="#20000000" />
+
+    <!--搜索框-->
+    <RelativeLayout
+        android:layout_width="256dp"
+        android:layout_height="28dp"
+        android:layout_below="@id/titleBar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_toRightOf="@id/re_selected_country"
+        android:background="@drawable/shape_search_gray_back"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            android:id="@+id/image_search"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/gray_search_icon" />
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/image_search"
+            android:background="@null"
+            android:hint="在这里输入国家或城市名"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#414141"
+            android:textColorHint="#a7a7a7"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/image_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/re_selected_country"
+        android:layout_marginLeft="15dp"
+        android:background="#20000000" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView1"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_divider" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_divider"
+        android:layout_toRightOf="@id/recyclerView1"
+        android:background="#fff" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView3"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_divider"
+        android:layout_toRightOf="@id/recyclerView2"
+        android:background="#fff" />
+
+    <!--下面已选择城市-->
+    <RelativeLayout
+        android:id="@+id/re_selected_cities"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/city_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="0"
+            android:textColor="#5a5a5a"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/text_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/city_number"
+            android:text="已选"
+            android:textColor="#5a5a5a"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/text_label"
+            android:layout_below="@id/text_label"
+            android:text="城市"
+            android:textColor="#5a5a5a"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_selected_cities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18sp"
+            android:layout_toRightOf="@id/text_label" />
+    </RelativeLayout>
+</RelativeLayout>

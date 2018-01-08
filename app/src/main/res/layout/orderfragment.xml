@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_horizontal"
+    android:textSize="18sp"
+    android:text="我的订单"/>
+        <RadioGroup
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/redPackage"
+                style="@style/radio_button_style"
+                android:text="红包付"
+                />
+            <RadioButton
+                android:id="@+id/PPaymoney"
+                style="@style/radio_button_style"
+                android:text="待付款" />
+            <RadioButton
+                android:id="@+id/PDGoods"
+                style="@style/radio_button_style"
+                android:text="待发货" />
+
+
+            <RadioButton
+                android:id="@+id/receiverGoods"
+                style="@style/radio_button_style"
+                android:text="待收货" />
+            <RadioButton
+                android:id="@+id/completed"
+                style="@style/radio_button_style"
+                android:text="已完成" />
+            <RadioButton
+                android:id="@+id/RAndCS"
+                style="@style/radio_button_style"
+                android:text="退款/售后" />
+        </RadioGroup>
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#6e6e6e"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/orderFragmentlayout"></FrameLayout>
+</LinearLayout>

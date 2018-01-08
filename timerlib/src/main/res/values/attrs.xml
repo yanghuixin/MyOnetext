@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="TimeCountView" tools:ignore="ResourceName">
+        <attr name="timerTextColor" format="color"/>
+        <attr name="timerBackground" format="reference"/>
+        <attr name="timerTextSize" format="dimension"/>
+    </declare-styleable>
+</resources>
