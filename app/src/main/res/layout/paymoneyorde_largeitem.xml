@@ -50,27 +50,27 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#f0f0f0"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginBottom="7dp"
-    android:layout_marginTop="8dp">
-    <Button
-        android:id="@+id/cancle"
-       android:background="@drawable/yuanbutton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="取消"
-       android:layout_marginLeft="90dp"
-        />
-    <Button
-        android:id="@+id/payMoney"
-        android:background="@drawable/yuanbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="去付款"
-        android:layout_marginLeft="135dp"
-        />
-</LinearLayout>
+        android:orientation="horizontal"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="8dp">
+        <Button
+            android:id="@+id/cancle"
+           android:background="@drawable/yuanbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+           android:layout_marginLeft="90dp"
+            />
+        <Button
+            android:id="@+id/payMoney"
+            android:background="@drawable/yuanbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去付款"
+            android:layout_marginLeft="135dp"
+            />
+    </LinearLayout>
 </LinearLayout>

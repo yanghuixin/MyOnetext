@@ -68,11 +68,12 @@ private  String path1;
                     ToastUtils.showToast(getApplicationContext(), (String) msg.obj);
                     break;
                 case STOR_DATA:
+                    storData.clear();
+                    storData.addAll(storDataRes.getMsg());
                     adapter1.notifyDataSetChanged();
                     break;
                 case NETWORK_ANOMALY:
                     ToastUtils.showToast(getApplicationContext(), (String) msg.obj);
-
                     break;
             }
         }
@@ -84,11 +85,8 @@ private  String path1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_more);
         bind = ButterKnife.bind(this);
-        Intent intent1 = getIntent();
-//        Intent intent2 = getIntent();
-//        Intent intent3 = getIntent();
-//        Intent intent4 = getIntent();
-        nearbyFragment = intent1.getStringExtra("NearbyFragment");
+        Intent intent = getIntent();
+        nearbyFragment = intent.getStringExtra("NearbyFragment");
         Log.d("getIntent", "onCreate:--------------> "+nearbyFragment);
         initType();
 
@@ -183,19 +181,23 @@ private  String path1;
                     Gson gson = new Gson();
                     String string = response.body().string();
                     Log.d("string", "商铺string------------------------>" + string);
-                    //JsonElement解析从后台获取的string对象，string对象包含属性Status和Msg
-                    JsonElement je = new JsonParser().parse(string);
-                    Log.d("string", "商铺Status------------------------>" + je.getAsJsonObject().get("Status"));
-                    //判断Status是否为0或Msg是否为空，若tatus为0或Msg为空，则说明得到的string没有数据，页面不加载
-                    if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")){
-                        return;
-                    }else{
-                        storDataRes = gson.fromJson(string, OneDataRes.class);
-                        storData.clear();
-                        storData.addAll(storDataRes.getMsg());
-                        Message msg = handler.obtainMessage();
-                        msg.what = STOR_DATA;
-                        handler.sendMessage(msg);
+                    try{
+                        //JsonElement解析从后台获取的string对象，string对象包含属性Status和Msg
+                        //需要用try/catch包裹，因为如果解析出来的数据中出现只有key没有value情况，解析会出现异常
+                        JsonElement je = new JsonParser().parse(string);
+                        Log.d("string", "商铺Status------------------------>" + je.getAsJsonObject().get("Status"));
+                        //判断Status是否为0或Msg是否为空，若tatus为0或Msg为空，则说明得到的string没有数据，页面不加载
+                        if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")){
+                            return;
+                        }else{
+                            storDataRes = gson.fromJson(string, OneDataRes.class);
+
+                            Message msg = handler.obtainMessage();
+                            msg.what = STOR_DATA;
+                            handler.sendMessage(msg);
+                        }
+                    } catch (Exception e){
+                        e.printStackTrace();
                     }
                 } else {
                     Message msg = handler.obtainMessage();

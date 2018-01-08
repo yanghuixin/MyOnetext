@@ -15,6 +15,9 @@ import com.example.administrator.myonetext.adapter.RAndCSOrderAdapter;
 import com.example.administrator.myonetext.bean.PPaymoneyOrdeDataRes;
 import com.example.administrator.myonetext.utils.ToastUtils;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -51,11 +54,12 @@ public class PDGoodsOrderFragment extends BaseFragment {
     private int pagei = 1;
     private int pid = 974;
     // private int type = 4;//type:查询订单状态；3：待付款；4：待发货；5：待收货；6：已完成；7：退款/售后
-    private int type = 7;
+    private int type = 4;
     private final static int ORDER_DATA = 5;//产品
     private final static int SERVER_EXCEPTION = 6;//服务器异常
     private final static int NETWORK_ANOMALY = 7;//网络异常
-    private List<PPaymoneyOrdeDataRes.MsgBean> msg=new ArrayList<PPaymoneyOrdeDataRes.MsgBean>();
+    private List<PPaymoneyOrdeDataRes.MsgBean> ordeData=new ArrayList<PPaymoneyOrdeDataRes.MsgBean>();
+    private PPaymoneyOrdeDataRes pPaymoneyOrdeDataRes;
     private RAndCSOrderAdapter adapter;
     private Handler handler = new Handler() {
         @Override
@@ -68,10 +72,10 @@ public class PDGoodsOrderFragment extends BaseFragment {
                     ToastUtils.showToast(getActivity(), (String) msg.obj);
                     break;
                 case ORDER_DATA:
+                    ordeData.addAll(pPaymoneyOrdeDataRes.getMsg());
                     adapter.notifyDataSetChanged();
                     break;
             }
-            super.handleMessage(msg);
         }
     };
     @Nullable
@@ -81,7 +85,7 @@ public class PDGoodsOrderFragment extends BaseFragment {
         unbinder = ButterKnife.bind(this, view);
         initListData(pagei, pid, type);//pid int 会员编号;type:查询订单状态；3：待付款；4：待发货；5：待收货；6：已完成；7：退款/售后
         initSmartRefresh(view);
-        adapter=new RAndCSOrderAdapter(getActivity(),msg);
+        adapter=new RAndCSOrderAdapter(getActivity(), ordeData);
         orderlist.setAdapter(adapter);
         return view;
     }
@@ -93,7 +97,8 @@ public class PDGoodsOrderFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                //  initListData(1, pid, type);
+                ordeData.clear();
+                initListData(1, pid, type);
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
@@ -107,7 +112,7 @@ public class PDGoodsOrderFragment extends BaseFragment {
     }
 
     private void initListData(int pagei, int pid, int type) {
-        String path = "http://app.tealg.com/api/app/OrderMsg.ashx?flag=myorder&pid="+pid+"&appkey=4b3b1f1235j654af4561gracv54c4h5q&type="+type+"&page="+pagei+"&pageSize=1";
+        String path = "http://app.tealg.com/api/app/OrderMsg.ashx?flag=myorder&pid="+pid+"&appkey=4b3b1f1235j654af4561gracv54c4h5q&type="+type+"&page="+pagei+"&pageSize=4";
         // String path = "http://app.tealg.com/api/app/OrderMsg.ashx?flag=myorder&pid=974&appkey=4b3b1f1235j654af4561gracv54c4h5q&type=7&page=1&pageSize=1";
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request.Builder requestBuilder = new Request.Builder().url(path);
@@ -129,15 +134,18 @@ public class PDGoodsOrderFragment extends BaseFragment {
                 if (null != response) {
                     Gson gson = new Gson();
                     String string = response.body().string();
-                    PPaymoneyOrdeDataRes pPaymoneyOrdeDataRes = gson.fromJson(string, PPaymoneyOrdeDataRes.class);
-                    int status = pPaymoneyOrdeDataRes.getStatus();
-                    if (status==0){
-                        Log.d("onResponse", "onResponse:http://app.tealg.com/api/app/OrderMsg.ashx?flag=myorder&pid=974&appkey=4b3b1f1235j654af4561gracv54c4h5q&type=3&page=1&pageSize=1----------------->status="+status);
-                    }else if (status==1){
-                        msg.addAll(pPaymoneyOrdeDataRes.getMsg());
-                        Message msg = new Message();
-                        msg.what = ORDER_DATA;
-                        handler.sendMessage(msg);
+                    try{
+                        JsonElement je = new JsonParser().parse(string);
+                        if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")){
+                            return;
+                        } else {
+                            pPaymoneyOrdeDataRes = gson.fromJson(string, PPaymoneyOrdeDataRes.class);
+                            Message msg = new Message();
+                            msg.what = ORDER_DATA;
+                            handler.sendMessage(msg);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
                 } else {
                     Message msg = handler.obtainMessage();

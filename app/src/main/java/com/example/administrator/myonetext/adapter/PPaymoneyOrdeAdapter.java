@@ -61,17 +61,18 @@ public class PPaymoneyOrdeAdapter extends BaseAdapter {
         viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.orderNum.setText("订单号 : " + msg.get(position).getOrderNumber());
         viewHolder.shopName.setText(msg.get(position).getOrdersMsg().get(0).getOrdersBusinessName());
-        viewHolder.threeAll.setText("共3件商品   实付" + msg.get(position).getOrderPirce() + "     红包：" + msg.get(position).getOrderPayInt());
+        viewHolder.threeAll.setText("共" + msg.get(position).getOrderState() + "件商品   实付" + msg.get(position).getOrderPirce() + "     红包：" + msg.get(position).getOrderPayInt());
         if (msg.get(position).getOrderState() == 6) {
             viewHolder.cancle.setText("申请退款");
             viewHolder.payMoney.setText("去评价");
         } else if (msg.get(position).getOrderState() == 3) {
             viewHolder.cancle.setText("取消");
             viewHolder.payMoney.setText("去支付");
-        } else {
+        }  else {
             viewHolder.cancle.setText("确认收货");
             viewHolder.payMoney.setText("取消订单");
         }
+        ordersProducts.clear();
         ordersProducts.addAll(msg.get(position).getOrdersMsg().get(0).getOrdersProducts());
         ItemlistAdapter itemlistadapter = new ItemlistAdapter(context, ordersProducts);
         viewHolder.productlistview.setAdapter(itemlistadapter);

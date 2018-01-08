@@ -67,6 +67,7 @@ public class RAndCSOrderAdapter extends BaseAdapter {
         }else {
             viewHolder.Completed.setText("未完成");
         }
+        ordersProducts.clear();
         ordersProducts.addAll(msg.get(position).getOrdersMsg().get(0).getOrdersProducts());
         ItemlistAdapter itemlistadapter = new ItemlistAdapter(context, ordersProducts);
         viewHolder.productlistview.setAdapter(itemlistadapter);
