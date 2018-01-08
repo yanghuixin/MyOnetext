@@ -85,6 +85,8 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
     private ArrayList<String> list_path;
     private List<BannerDataRes.MsgBean> msg = new ArrayList<BannerDataRes.MsgBean>();
     private BannerDataRes bannerDataRes;
+    private NearbyStoreDataRes nearbyStoreDataRes;
+    private NearbyProductDataRes nearbyProductDataRes;
     private final static int BANNER_DATA = 1;//轮播图
     private final static int INIT_STOR_DATE = 2;//店铺
     private final static int INIT_PRODUCT_DATE = 3;//产品
@@ -96,12 +98,15 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case INIT_STOR_DATE:
+                    storData.clear();
+                    storData.addAll(nearbyStoreDataRes.getMsg());
                     adapter.notifyDataSetChanged();
                     break;
                 case BANNER_DATA:
                     initMyBanner(banner);
                     break;
                 case INIT_PRODUCT_DATE:
+                    productData.addAll(nearbyProductDataRes.getMsg());
                     adapter2.notifyDataSetChanged();
                     break;
                 case SERVER_EXCEPTION:
@@ -198,11 +203,10 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
                     Gson gson = new Gson();
                     String string = response.body().string();
                     Log.d("string", "商家onResponse:--------------------------> " + string);
-                    NearbyStoreDataRes nearbyStoreDataRes = gson.fromJson(string, NearbyStoreDataRes.class);
+                    nearbyStoreDataRes = gson.fromJson(string, NearbyStoreDataRes.class);
                     rsKey = nearbyStoreDataRes.getRsKey();
                     initProductData(pagei, rsKey);
-                    storData.clear();
-                    storData.addAll(nearbyStoreDataRes.getMsg());
+
                     Message message = new Message();
                     message.what = INIT_STOR_DATE;
                     handler.sendMessage(message);
@@ -241,8 +245,7 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
                     Gson gson = new Gson();
                     String string = response.body().string();
                     Log.d("string", "产品onResponse:--------------------------> " + string);
-                    NearbyProductDataRes nearbyProductDataRes = gson.fromJson(string, NearbyProductDataRes.class);
-                    productData.addAll(nearbyProductDataRes.getMsg());
+                    nearbyProductDataRes = gson.fromJson(string, NearbyProductDataRes.class);
 
                     Message message = new Message();
                     message.what = INIT_PRODUCT_DATE;
