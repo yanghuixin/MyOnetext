@@ -136,27 +136,20 @@ private OrderAdapter adapter;
                 if (null != response) {
                     Gson gson = new Gson();
                     String string = response.body().string();
-           /////////////////////////////////////////////////////////////////////////////////////
-//                    try{
-//                        JsonElement je = new JsonParser().parse(string);
-//                        if (je.getAsJsonObject().get("Status").equals("0")){
-//                            return;
-//                        }else {
-//                            getDefaultAdressDataRes = gson.fromJson(string, GetDefaultAdressDataRes.class);
-//                            Log.d("qqq", "handleMessage:getDefaultAdressDataRes -------->"+getDefaultAdressDataRes.getStatus());
-//                            Message message = new Message();
-//                            message.what = INIT_STOR_DATE;
-//                            handler.sendMessage(message);
-//                        }
-//                    }catch (Exception e){
-//                        e.printStackTrace();
-//                    }
-           ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    getDefaultAdressDataRes = gson.fromJson(string, GetDefaultAdressDataRes.class);
-                    Log.d("qqq", "handleMessage:getDefaultAdressDataRes -------->"+getDefaultAdressDataRes.getStatus());
-                    Message message = new Message();
-                    message.what = INIT_STOR_DATE;
-                    handler.sendMessage(message);
+                    try{
+                        JsonElement je = new JsonParser().parse(string);
+                        if (je.getAsJsonObject().get("status").getAsInt() == 0){
+                            return;
+                        }else {
+                            getDefaultAdressDataRes = gson.fromJson(string, GetDefaultAdressDataRes.class);
+                            Log.d("qqq", "handleMessage:getDefaultAdressDataRes -------->"+getDefaultAdressDataRes.getStatus());
+                            Message message = new Message();
+                            message.what = INIT_STOR_DATE;
+                            handler.sendMessage(message);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 } else {
                     Message msg = handler.obtainMessage();
                     msg.what = NETWORK_ANOMALY;

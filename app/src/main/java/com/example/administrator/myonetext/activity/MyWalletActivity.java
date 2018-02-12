@@ -135,24 +135,11 @@ public class MyWalletActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 if (null != response) {
-        ////////////////////////////////////////////////////////
-//                    Gson gson = new Gson();
-//                    String string = response.body().string();
-//                    Log.d("string", "商家onResponse:--------------------------> " + string);
-//                    myWalletDataRes = gson.fromJson(string, MyWalletDataRes.class);
-//                    if (myWalletDataRes.getStatus()==1){
-//                        Message message = new Message();
-//                        message.what = INIT_STOR_DATE;
-//                        handler.sendMessage(message);
-//                    }else {
-//                        return;
-//                    }
-    ///////////////////////////////////////////////////////////
                     Gson gson = new Gson();
                     String string = response.body().string();
                     try{
                         JsonElement je = new JsonParser().parse(string);
-                        if (je.getAsJsonObject().get("Status").equals("0")){
+                        if (je.getAsJsonObject().get("status").getAsInt() == 0){
                             return;
                         }else {
                             myWalletDataRes = gson.fromJson(string, MyWalletDataRes.class);
