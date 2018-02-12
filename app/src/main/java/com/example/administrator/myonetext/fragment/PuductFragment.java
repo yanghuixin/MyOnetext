@@ -128,7 +128,7 @@ public class PuductFragment extends BaseFragment {
                     String string = response.body().string();
                     try {
                         JsonElement je = new JsonParser().parse(string);
-                        if (je.getAsJsonObject().get("Status").getAsInt()==0) {
+                        if (je.getAsJsonObject().get("status").getAsInt() == 0) {
                             Log.d("uid", "onResponse: -------------------------------status:0");
                             return;
                         } else {

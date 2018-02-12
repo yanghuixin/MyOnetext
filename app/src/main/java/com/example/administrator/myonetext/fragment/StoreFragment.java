@@ -145,36 +145,26 @@ public class StoreFragment extends BaseFragment {
                 if (null != response) {
                     Gson gson = new Gson();
                     String string = response.body().string();
-                    ///////////////////////////////////////////////////////////////////////////
-//                    try{
-//                        JsonElement je = new JsonParser().parse(string);
-//                        if (je.getAsJsonObject().get("Status").equals("0")){//{ "status":0,"message":"未登录或登录已超时"}
-//                            Log.d("uid", "onResponse: -------------------------------status:0");
-//                            return;
-//                        }else {
-//                            collectionStoreDataRes = gson.fromJson(string, CollectionStoreDataRes.class);
-//                            if (collectionStoreDataRes.getStatus()==0) {
-//                                return;
-//                            } else {
-//                                Log.d("uid", "storDataRes.getStatus(): --------->"+collectionStoreDataRes.getStatus());
-//                                CollectionStoreMessageBean.addAll(collectionStoreDataRes.getMessage());
-//                                Message msg = handler.obtainMessage();
-//                                msg.what = STOR_DATA;
-//                                handler.sendMessage(msg);
-//                            }
-//                        }
-//                    }catch (Exception e){
-//                        e.printStackTrace();
-//                    }
-
-                    /////////////////////////////////////////////////////////
-                    Log.d("uid", "onResponse: collectionStoreDataRes-------------- 1>");
-                    collectionStoreDataRes = gson.fromJson(string, CollectionStoreDataRes.class);
-                    CollectionStoreMessageBean.addAll(collectionStoreDataRes.getMessage());
-                    Message msg = handler.obtainMessage();
-                    msg.what = STOR_DATA;
-                    handler.sendMessage(msg);
-                    ////////////////////////////////////////////////////////////////
+                    try{
+                        JsonElement je = new JsonParser().parse(string);
+                        if (je.getAsJsonObject().get("status").getAsInt() == 0){//{ "status":0,"message":"未登录或登录已超时"}
+                            Log.d("uid", "onResponse: -------------------------------status:0");
+                            return;
+                        }else {
+                            collectionStoreDataRes = gson.fromJson(string, CollectionStoreDataRes.class);
+                            if (collectionStoreDataRes.getStatus()==0) {
+                                return;
+                            } else {
+                                Log.d("uid", "storDataRes.getStatus(): --------->"+collectionStoreDataRes.getStatus());
+                                CollectionStoreMessageBean.addAll(collectionStoreDataRes.getMessage());
+                                Message msg = handler.obtainMessage();
+                                msg.what = STOR_DATA;
+                                handler.sendMessage(msg);
+                            }
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 } else {
                     Message msg = handler.obtainMessage();
                     msg.what = NETWORK_ANOMALY;
