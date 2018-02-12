@@ -33,6 +33,7 @@ public class MapActivity extends AppCompatActivity implements LocationSource, AM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         setContentView(R.layout.activity_map);
         initView();
         // 创建地图

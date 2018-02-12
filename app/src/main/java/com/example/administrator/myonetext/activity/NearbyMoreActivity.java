@@ -7,13 +7,16 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.administrator.myonetext.R;
+import com.example.administrator.myonetext.adapter.MoreTodylistAdapter;
 import com.example.administrator.myonetext.adapter.OneAdapter;
 import com.example.administrator.myonetext.bean.OneDataRes;
+import com.example.administrator.myonetext.bean.TodayDataRes;
 import com.example.administrator.myonetext.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -41,8 +44,11 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class NearbyMoreActivity extends AppCompatActivity {
-private String type;
-private  String path1;
+    private final static int TODAY_DATA = 2;//今日秒杀
+    private List<TodayDataRes.MsgBean> todayData = new ArrayList<>();////今日秒杀
+    private MoreTodylistAdapter adapter;//今日秒杀
+    private String type;
+    private String path1;
     @BindView(R.id.morelist)
     ListView morelist;
     @BindView(R.id.re_clickBack)
@@ -75,6 +81,9 @@ private  String path1;
                 case NETWORK_ANOMALY:
                     ToastUtils.showToast(getApplicationContext(), (String) msg.obj);
                     break;
+                case TODAY_DATA:
+                    morelist.setAdapter(adapter);
+                    break;
             }
         }
     };
@@ -83,14 +92,13 @@ private  String path1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_nearby_more);
         bind = ButterKnife.bind(this);
         Intent intent = getIntent();
         nearbyFragment = intent.getStringExtra("NearbyFragment");
-        Log.d("getIntent", "onCreate:--------------> "+nearbyFragment);
-        initType();
-
-        initData(page,type);
+        Log.d("getIntent", "onCreate:--------------> " + nearbyFragment);
+        initTypeAndRequestData();
         adapter1 = new OneAdapter(this, storData);
         morelist.setAdapter(adapter1);
         //设置 Header 为 Material样式
@@ -100,29 +108,38 @@ private  String path1;
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                initData(1,type);
+                initData(1, type);
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                initData(page,type);
+                initData(page, type);
                 refreshlayout.finishLoadmore(2000/*,false*/);//传入false表示加载失败
             }
         });
     }
 
-    private void initType() {
-        switch (nearbyFragment){
+    private void initTypeAndRequestData() {
+        switch (nearbyFragment) {
             case "1":
-                type="ms";
+                type = "ms";
+                initData(page, type);
                 break;
             case "2":
-                type="cjy";
+                type = "cjy";
+                initData(page, type);
                 break;
             case "3":
-                type="mmm";
+                type = "mmm";
+                initData(page, type);
+                break;
+            case "11":
+                initTodayData();//今日秒杀
+                break;
+            case "12":
+                initStorData();
                 break;
         }
     }
@@ -145,21 +162,10 @@ private  String path1;
         }
     }
 
-    private void initData(int page,String type) {
-        path1 = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+page+"&pageSize=4&pcid=0&type="+type+"&wdpt=39.892138&jdpt=116.323148";
-
-//        if (oneNearbyFragment.equals("1")){
-//            path1 = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+page+"&pageSize=4&pcid=0&type=ms&wdpt=39.892138&jdpt=116.323148";
-//        }else if(twoNearbyFragment.equals("2")){
-//            path1 = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+page+"&pageSize=4&pcid=0&type=cjy&wdpt=39.892138&jdpt=116.323148";
-//
-//        }else if (threeNearbyFragment.equals("3")){
-//            path1 = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+page+"&pageSize=4&pcid=0&type=mmm&wdpt=39.892138&jdpt=116.323148";
-//
-//        }else if (fourNearbyFragment.equals("4")){
-//            path1 = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+page+"&pageSize=4&pcid=0&type=&wdpt=39.892138&jdpt=116.323148";
-//
-//        }
+    private void initData(int page, String type) {
+        http:
+//app.tealg.com/api/app/Business.ashx?flag=indexbusiness&page=1&pageSize=4&pageno=1&pcid=0
+        path1 = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page=" + page + "&pageSize=4&pcid=0&type=" + type + "&wdpt=39.892138&jdpt=116.323148";
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request.Builder requestBuilder = new Request.Builder().url(path1);
         //可以省略，默认是GET请求
@@ -181,22 +187,21 @@ private  String path1;
                     Gson gson = new Gson();
                     String string = response.body().string();
                     Log.d("string", "商铺string------------------------>" + string);
-                    try{
+                    try {
                         //JsonElement解析从后台获取的string对象，string对象包含属性Status和Msg
                         //需要用try/catch包裹，因为如果解析出来的数据中出现只有key没有value情况，解析会出现异常
                         JsonElement je = new JsonParser().parse(string);
                         Log.d("string", "商铺Status------------------------>" + je.getAsJsonObject().get("Status"));
                         //判断Status是否为0或Msg是否为空，若tatus为0或Msg为空，则说明得到的string没有数据，页面不加载
-                        if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")){
+                        if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")) {
                             return;
-                        }else{
+                        } else {
                             storDataRes = gson.fromJson(string, OneDataRes.class);
-
                             Message msg = handler.obtainMessage();
                             msg.what = STOR_DATA;
                             handler.sendMessage(msg);
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -210,5 +215,100 @@ private  String path1;
         page++;
     }
 
+    private void initTodayData() {
+        //创建okHttpClient对象
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        //创建一个Request
+        final Request request = new Request.Builder()
+                .url("http://app.tealg.com/api/app/Product.ashx?flag=indexProSale&&page=1&&pageSize=6&&pcid=0")
+                .build();
+        //new call
+        Call call = mOkHttpClient.newCall(request);
+        //请求加入调度
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Message msg = handler.obtainMessage();
+                msg.what = SERVER_EXCEPTION;
+                msg.obj = "服务器" + e.getMessage();
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onResponse(final Response response) throws IOException {
+                if (null != response) {
+                    Gson gson = new Gson();
+                    String string = response.body().string();
+                    try{
+                        JsonElement je = new JsonParser().parse(string);
+                        if (je.getAsJsonObject().get("Status").equals("0")||je.getAsJsonObject().get("Msg").equals("")){
+                            return;
+                        }else {
+                            TodayDataRes todayDataRes = gson.fromJson(string, TodayDataRes.class);
+                            todayData.clear();
+                            todayData.addAll(todayDataRes.getMsg());
+                            Log.d("request", "onResponse:--------------------------------> " + todayData.size());
+                            adapter = new MoreTodylistAdapter(getApplicationContext(), todayData);
+                            Message msg = handler.obtainMessage();
+                            msg.what = TODAY_DATA;
+                            handler.sendMessage(msg);
+                        }
+                    }catch (Exception e){
+                       e.printStackTrace();
+                    }
+                } else {
+                    Message msg = handler.obtainMessage();
+                    msg.what = NETWORK_ANOMALY;
+                    msg.obj = "无网络";
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+    }
+
+    private void initStorData() {
+        String path1 = "http://app.tealg.com/api/app/Business.ashx?flag=indexbusiness&&page=1&&pageSize=4&&pageno=1&&pcid=0";
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        Request.Builder requestBuilder = new Request.Builder().url(path1);
+        //可以省略，默认是GET请求
+        requestBuilder.method("GET", null);
+        final Request request = requestBuilder.build();
+        Call mcall = mOkHttpClient.newCall(request);
+        mcall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Message msg = handler.obtainMessage();
+                msg.what = SERVER_EXCEPTION;
+                msg.obj = "服务器" + e.getMessage();
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if (null != response) {
+                    Gson gson = new Gson();
+                    String string = response.body().string();
+                    Log.d("string", "商铺string------------------------>" + string);
+                    storDataRes = gson.fromJson(string, OneDataRes.class);
+                    if (storDataRes.getStatus() .equals("0")) {
+                        return;
+                    } else {
+                        storData.clear();
+                        storData.addAll(storDataRes.getMsg());
+                        Message msg = handler.obtainMessage();
+                        msg.what = STOR_DATA;
+                        handler.sendMessage(msg);
+                    }
+
+                } else {
+                    Message msg = handler.obtainMessage();
+                    msg.what = NETWORK_ANOMALY;
+                    msg.obj = "无网络";
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+
+    }
 
 }

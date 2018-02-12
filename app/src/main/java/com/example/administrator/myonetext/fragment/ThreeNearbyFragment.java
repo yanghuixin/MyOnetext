@@ -11,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.administrator.myonetext.R;
 import com.example.administrator.myonetext.activity.NearbyMoreActivity;
+import com.example.administrator.myonetext.activity.NewStoredetailsActivity;
+import com.example.administrator.myonetext.activity.ProductDetailsActivity;
 import com.example.administrator.myonetext.adapter.NearbyProductAdapter;
 import com.example.administrator.myonetext.adapter.NearbyStroeAdapter;
 import com.example.administrator.myonetext.bean.BannerDataRes;
@@ -128,7 +131,7 @@ public class ThreeNearbyFragment extends BaseFragment implements OnBannerListene
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         initBannerData(285);
-        initstorData("mmm", wdpt, jdpt);
+
         initSmartRefresh(view);
         adapter = new NearbyStroeAdapter(getActivity(), storData);
         listView1.setAdapter(adapter);
@@ -146,7 +149,30 @@ public class ThreeNearbyFragment extends BaseFragment implements OnBannerListene
                 return false;
             }
         });
+        initItemOnClick();
         return view;
+    }
+    private void initItemOnClick() {
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent1 = new Intent();
+                //      intent1.setClass(getActivity(), StoredetailsActivity.class);
+                intent1.setClass(getActivity(), NewStoredetailsActivity.class);
+                int bid = storData.get(position).getBid();
+                intent1.putExtra("bid", bid + "");
+                startActivity(intent1);
+            }
+        });
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                int pid = productData.get(position).getPid();
+                intent.putExtra("pid", pid + "");
+                startActivity(intent);
+            }
+        });
     }
     private void initSmartRefresh(View view) {
         //设置 Header 为 Material样式
@@ -174,11 +200,12 @@ public class ThreeNearbyFragment extends BaseFragment implements OnBannerListene
         jdpt = event.getJdpt();
         wdpt = event.getWdpt();
         Log.d("onEvent", "----------------------------->" + jdpt + "--------------->" + wdpt);
+        initstorData("mmm", wdpt, jdpt);
     }
 
     private void initstorData(String type, String wdpt, String jdpt) {
-        //  String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+pagei+"&pageSize=4&pcid=0&type="+type+"&wdpt="+wdpt+"&jdpt="+jdpt;
-        String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page=1&pageSize=4&pcid=0&type=mmm&wdpt=39.892138&jdpt=116.323148";
+         String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+pagei+"&pageSize=4&pcid=0&type="+type+"&wdpt="+wdpt+"&jdpt="+jdpt;
+       // String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page=1&pageSize=4&pcid=0&type=mmm&wdpt=39.892138&jdpt=116.323148";
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request.Builder requestBuilder = new Request.Builder().url(nearbyMs);
         //可以省略，默认是GET请求
@@ -204,7 +231,6 @@ public class ThreeNearbyFragment extends BaseFragment implements OnBannerListene
                     nearbyStoreDataRes = gson.fromJson(string, NearbyStoreDataRes.class);
                     rsKey = nearbyStoreDataRes.getRsKey();
                     initProductData(pagei, rsKey);
-
                     Message message = new Message();
                     message.what = INIT_STOR_DATE;
                     handler.sendMessage(message);
@@ -245,7 +271,6 @@ public class ThreeNearbyFragment extends BaseFragment implements OnBannerListene
                     String string = response.body().string();
                     Log.d("string", "产品Three_onResponse:--------------------------> " + string);
                     nearbyProductDataRes = gson.fromJson(string, NearbyProductDataRes.class);
-
                     Message message = new Message();
                     message.what = INIT_PRODUCT_DATE;
                     handler.sendMessage(message);

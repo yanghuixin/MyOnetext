@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.administrator.myonetext.R;
 import com.example.administrator.myonetext.activity.NearbyMoreActivity;
+import com.example.administrator.myonetext.activity.NewStoredetailsActivity;
+import com.example.administrator.myonetext.activity.ProductDetailsActivity;
 import com.example.administrator.myonetext.adapter.NearbyProductAdapter;
 import com.example.administrator.myonetext.adapter.NearbyStroeAdapter;
 import com.example.administrator.myonetext.bean.BannerDataRes;
@@ -129,7 +132,6 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         initBannerData(283);
-        initstorData("ms", wdpt, jdpt);
         initSmartRefresh(view);
         adapter = new NearbyStroeAdapter(getActivity(), storData);
         listView1.setAdapter(adapter);
@@ -147,7 +149,31 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
                 return false;
             }
         });
+        initItemOnClick();
         return view;
+    }
+
+    private void initItemOnClick() {
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent1 = new Intent();
+                //      intent1.setClass(getActivity(), StoredetailsActivity.class);
+                intent1.setClass(getActivity(), NewStoredetailsActivity.class);
+                int bid = storData.get(position).getBid();
+                intent1.putExtra("bid", bid + "");
+                startActivity(intent1);
+            }
+        });
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                int pid = productData.get(position).getPid();
+                intent.putExtra("pid", pid + "");
+                startActivity(intent);
+            }
+        });
     }
 
     private void initSmartRefresh(View view) {
@@ -176,6 +202,7 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
         jdpt = event.getJdpt();
         wdpt = event.getWdpt();
         Log.d("onEvent", "----------------------------->" + jdpt + "--------------->" + wdpt);
+        initstorData("ms", wdpt, jdpt);
     }
 
     private void initstorData(String type, String wdpt, String jdpt) {
@@ -206,7 +233,6 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
                     nearbyStoreDataRes = gson.fromJson(string, NearbyStoreDataRes.class);
                     rsKey = nearbyStoreDataRes.getRsKey();
                     initProductData(pagei, rsKey);
-
                     Message message = new Message();
                     message.what = INIT_STOR_DATE;
                     handler.sendMessage(message);
@@ -246,7 +272,6 @@ public class OneNearbyFragment extends BaseFragment implements OnBannerListener 
                     String string = response.body().string();
                     Log.d("string", "产品onResponse:--------------------------> " + string);
                     nearbyProductDataRes = gson.fromJson(string, NearbyProductDataRes.class);
-
                     Message message = new Message();
                     message.what = INIT_PRODUCT_DATE;
                     handler.sendMessage(message);

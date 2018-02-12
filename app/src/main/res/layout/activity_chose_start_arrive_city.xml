@@ -111,7 +111,7 @@
             android:hint="在这里输入国家或城市名"
             android:imeOptions="actionSearch"
             android:maxLines="1"
-            android:singleLine="true"
+
             android:textColor="#414141"
             android:textColorHint="#a7a7a7"
             android:textSize="15sp" />

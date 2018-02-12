@@ -33,15 +33,29 @@ import com.bumptech.glide.util.Util;
 import com.bunny.view.TimeCountView;
 import com.example.administrator.myonetext.MainActivity;
 import com.example.administrator.myonetext.R;
+import com.example.administrator.myonetext.activity.ETBWActivity;
+import com.example.administrator.myonetext.activity.HuiRedActivity;
+import com.example.administrator.myonetext.activity.LoginActivity;
 import com.example.administrator.myonetext.activity.MapActivity;
+import com.example.administrator.myonetext.activity.NearbyMoreActivity;
+import com.example.administrator.myonetext.activity.NewStoredetailsActivity;
+import com.example.administrator.myonetext.activity.ProductDetailsActivity;
 import com.example.administrator.myonetext.activity.SearchActivity;
+import com.example.administrator.myonetext.activity.SmsActivity;
+import com.example.administrator.myonetext.activity.StoredetailsActivity;
+import com.example.administrator.myonetext.activity.WholeActivity;
+import com.example.administrator.myonetext.adapter.AreaAdapter;
 import com.example.administrator.myonetext.adapter.HorizontallistAdapter;
 import com.example.administrator.myonetext.adapter.OneAdapter;
 import com.example.administrator.myonetext.adapter.TwoAdapter;
 import com.example.administrator.myonetext.bean.BannerDataRes;
+import com.example.administrator.myonetext.bean.GouhuiUser;
 import com.example.administrator.myonetext.bean.OneDataRes;
+import com.example.administrator.myonetext.bean.PPaymoneyOrdeDataRes;
 import com.example.administrator.myonetext.bean.ProductDataRes;
+import com.example.administrator.myonetext.bean.RedPackageDataRes;
 import com.example.administrator.myonetext.bean.TodayDataRes;
+import com.example.administrator.myonetext.dialog.HuiRedDialog;
 import com.example.administrator.myonetext.dialog.ListDialog;
 import com.example.administrator.myonetext.myview.HorizontalListView;
 import com.example.administrator.myonetext.myview.MyListView;
@@ -50,6 +64,7 @@ import com.example.administrator.myonetext.utils.JsonParser;
 import com.example.administrator.myonetext.utils.ToastUtils;
 import com.example.administrator.myonetext.utils.UIHelper;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerListener;
@@ -90,7 +105,7 @@ import java.util.List;
  * Created by Administrator on 2017/12/24.
  */
 
-public class HomeFragment extends BaseFragment implements OnBannerListener, View.OnClickListener {
+public class HomeFragment extends BaseFragment implements OnBannerListener, View.OnClickListener, AdapterView.OnItemClickListener {
     private int pagei = 1;
     private Button smsnum;
     private ImageView sms;
@@ -103,7 +118,7 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
     private Banner banner;
     private Banner banner2;
     private EditText search;
-    private TextView more2,whole,eatfood,tea_market,buybuybuy,hui_red;
+    private TextView more2, whole, eatfood, tea_market, buybuybuy, hui_red;
     private HorizontalListView horizontallist;
     private RefreshLayout refreshLayout;
     //    private ImageView increase;
@@ -128,6 +143,10 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
     private final static int PRODUCT_DATA = 5;//产品
     private final static int SERVER_EXCEPTION = 6;//服务器异常
     private final static int NETWORK_ANOMALY = 7;//网络异常
+    private final static int ORDER_DATA = 8;//产品
+    private final static int GO_LOGIN = 9;//去登录页
+    private int pid = 974;
+    private RedPackageDataRes redPackageDataRes;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -153,6 +172,14 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
                 case NETWORK_ANOMALY:
                     ToastUtils.showToast(getActivity(), (String) msg.obj);
                     break;
+                case ORDER_DATA:
+                    huiRedDialog = new HuiRedDialog(getActivity(), R.style.loading_dialog, onClickListener);
+                    huiRedDialog.show();
+                    break;
+                case GO_LOGIN://去登录页
+                    Intent intent2 = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent2);
+                    break;
             }
         }
     };
@@ -174,7 +201,20 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
     private String mEngineType = SpeechConstant.TYPE_CLOUD;//在线引擎TYPE_CLOUD
     int ret = 0; // 函数调用返回值
     private boolean mTranslateEnable = false;
+    private HuiRedDialog huiRedDialog;
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
+            switch (v.getId()) {
+                case R.id.open:
+                    Intent intent = new Intent(getActivity(), HuiRedActivity.class);
+                    startActivity(intent);
+                    huiRedDialog.dismiss();
+                    break;
+            }
+        }
+    };
 
     @Override
     @SuppressLint("ShowToast")
@@ -253,10 +293,22 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
         sure.setOnClickListener(this);
         hui_red.setOnClickListener(this);
         buybuybuy.setOnClickListener(this);
-        hui_red.setOnClickListener(this);
         whole.setOnClickListener(this);
         tea_market.setOnClickListener(this);
         eatfood.setOnClickListener(this);
+        ///////////////////////////////////////////////////
+        list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent1 = new Intent();
+         //      intent1.setClass(getActivity(), StoredetailsActivity.class);
+                intent1.setClass(getActivity(), NewStoredetailsActivity.class);
+                int bid = storData.get(position).getBid();
+                intent1.putExtra("bid", bid + "");
+                startActivity(intent1);
+            }
+        });
+        list2.setOnItemClickListener(this);
     }
 
     private void initView(View view) {
@@ -289,6 +341,7 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
         adapter2 = new TwoAdapter(getActivity(), productData);
         list2.setAdapter(adapter2);
         UIHelper.setListViewHeightBasedOnChildren(list2);
+
     }
 
     private void initOnCreateXunfei() {
@@ -360,7 +413,6 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
         final Request request = requestBuilder.build();
         final Call mcall = mOkHttpClient.newCall(request);
         mcall.enqueue(new Callback() {
-
             @Override
             public void onFailure(Request request, IOException e) {
                 Message msg = handler.obtainMessage();
@@ -416,14 +468,23 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
                 if (null != response) {
                     Gson gson = new Gson();
                     String string = response.body().string();
-                    TodayDataRes todayDataRes = gson.fromJson(string, TodayDataRes.class);
-                    todayData.clear();
-                    todayData.addAll(todayDataRes.getMsg());
-                    Log.d("request", "onResponse:--------------------------------> " + todayData.size());
-                    adapter = new HorizontallistAdapter(getActivity(), todayData);
-                    Message msg = handler.obtainMessage();
-                    msg.what = TODAY_DATA;
-                    handler.sendMessage(msg);
+                    try{
+                        JsonElement je = new com.google.gson.JsonParser().parse(string);
+                        if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")){
+                            return;
+                        } else {
+                            TodayDataRes todayDataRes = gson.fromJson(string, TodayDataRes.class);
+                            todayData.clear();
+                            todayData.addAll(todayDataRes.getMsg());
+                            Log.d("request", "onResponse:--------------------------------> " + todayData.size());
+                            adapter = new HorizontallistAdapter(getActivity(), todayData);
+                            Message msg = handler.obtainMessage();
+                            msg.what = TODAY_DATA;
+                            handler.sendMessage(msg);
+                        }
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
                 } else {
                     Message msg = handler.obtainMessage();
                     msg.what = NETWORK_ANOMALY;
@@ -456,11 +517,10 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
                 if (null != response) {
                     Gson gson = new Gson();
                     String string = response.body().string();
-                    Log.d("string", "商铺string------------------------>" + string);
                     storDataRes = gson.fromJson(string, OneDataRes.class);
-                    if (storDataRes.getStatus()==0){
+                    if (storDataRes.getStatus().equals("0")) {
                         return;
-                    }else {
+                    } else {
                         storData.clear();
                         storData.addAll(storDataRes.getMsg());
                         Message msg = handler.obtainMessage();
@@ -566,25 +626,25 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
 
     @Override
     public void onClick(View v) {
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.iv_location:
-                Intent intent = new Intent(getActivity(), MapActivity.class);
+                intent.setClass(getActivity(), MapActivity.class);
                 startActivity(intent);
                 break;
             case R.id.sms:
-
-
+                intent.setClass(getActivity(), SmsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.more:
-
-
+                intent.setClass(getActivity(), NearbyMoreActivity.class);
+                intent.putExtra("NearbyFragment", "11");
+                startActivity(intent);
                 break;
             case R.id.more2:
-
-
+                intent.setClass(getActivity(), NearbyMoreActivity.class);
+                intent.putExtra("NearbyFragment", "12");
+                startActivity(intent);
                 break;
             case R.id.voice:
                 initMyXunfei(voice);
@@ -594,47 +654,104 @@ public class HomeFragment extends BaseFragment implements OnBannerListener, View
 //
 //                break;
             case R.id.sure://
-                Intent intent1 = new Intent(getActivity(), SearchActivity.class);
+                intent.setClass(getActivity(), SearchActivity.class);
                 String s = search.getText().toString().trim();
-                intent1.putExtra("keyword", s);
-                startActivity(intent1);
+                intent.putExtra("keyword", s);
+                startActivity(intent);
                 break;
             case R.id.eatfood:
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                OneNearbyFragment oneNearbyFragment = new OneNearbyFragment();
-                fragmentTransaction.replace(R.id.fragment, oneNearbyFragment);
-                fragmentTransaction.commit();
+                intent.setClass(getActivity(), ETBWActivity.class);
+                intent.putExtra("ETBWActivity", "ms");
+                startActivity(intent);
                 break;
             case R.id.tea_market:
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                TwoNearbyFragment twoNearbyFragment = new TwoNearbyFragment();
-                fragmentTransaction.replace(R.id.fragment, twoNearbyFragment);
-                fragmentTransaction.commit();
-
+                intent.setClass(getActivity(), ETBWActivity.class);
+                intent.putExtra("ETBWActivity", "cjy");
+                startActivity(intent);
                 break;
             case R.id.buybuybuy:
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                ThreeNearbyFragment threeNearbyFragment = new ThreeNearbyFragment();
-                fragmentTransaction.replace(R.id.fragment, threeNearbyFragment);
-                fragmentTransaction.commit();
-
+                intent.setClass(getActivity(), ETBWActivity.class);
+                intent.putExtra("ETBWActivity", "mmm");
+                startActivity(intent);
                 break;
             case R.id.hui_red:
+                if (GouhuiUser.getInstance().hasUserInfo(getActivity()))//自动登录判断，SharePrefences中有数据，则跳转到主页，没数据则跳转到登录页
+                {
+                    showEditDialog(v, pid);
+                } else {
+                    handler.sendEmptyMessageAtTime(GO_LOGIN, 2000);
+                }
 
                 break;
             case R.id.whole:
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                FourNearbyFragment fourNearbyFragment = new FourNearbyFragment();
-                fragmentTransaction.replace(R.id.fragment, fourNearbyFragment);
-                fragmentTransaction.commit();
-
+                intent.setClass(getActivity(), WholeActivity.class);
+                startActivity(intent);
                 break;
         }
+
     }
+
+    private void showEditDialog(View v, int pid) {
+        String path = "http://app.tealg.com/api/app/Member.ashx?flag=isqd&&pid=" + pid + "&&appkey=4b3b1f1235j654af4561gracv54c4h5q";
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        Request.Builder requestBuilder = new Request.Builder().url(path);
+        //可以省略，默认是GET请求
+        requestBuilder.method("GET", null);
+        final Request request = requestBuilder.build();
+        final Call mcall = mOkHttpClient.newCall(request);
+        mcall.enqueue(new Callback() {
+
+
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Message msg = handler.obtainMessage();
+                msg.what = SERVER_EXCEPTION;
+                msg.obj = "服务器" + e.getMessage();
+                handler.sendMessage(msg);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if (null != response) {
+                    Gson gson = new Gson();
+                    String string = response.body().string();
+                    try {
+                        JsonElement je = new com.google.gson.JsonParser().parse(string);
+                        if (je.getAsJsonObject().get("state").equals("0")) {
+                            return;
+                        } else {
+                            redPackageDataRes = gson.fromJson(string, RedPackageDataRes.class);
+                            if (redPackageDataRes.getState() == 1) {
+                                Message msg = new Message();
+                                msg.what = ORDER_DATA;
+                                handler.sendMessage(msg);
+                            } else {
+                                Intent intent = new Intent(getActivity(), HuiRedActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Message msg = handler.obtainMessage();
+                    msg.what = NETWORK_ANOMALY;
+                    msg.obj = "无网络";
+                    handler.sendMessage(msg);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        int pid = productData.get(position).getPid();
+        intent.putExtra("pid", pid + "");
+        startActivity(intent);
+    }
+
 
     //自定义的图片加载器
     public static class MyLoader extends ImageLoader {

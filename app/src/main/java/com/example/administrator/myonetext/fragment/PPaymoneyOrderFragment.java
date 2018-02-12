@@ -138,7 +138,7 @@ public class PPaymoneyOrderFragment extends BaseFragment {
                     String string = response.body().string();
                     try{
                         JsonElement je = new JsonParser().parse(string);
-                        if (je.getAsJsonObject().get("Status").equals("0") || je.getAsJsonObject().get("Msg").equals("")){
+                        if (je.getAsJsonObject().get("Status").getAsString().equals("0") || je.getAsJsonObject().get("Msg").getAsString().equals("")){
                             return;
                         } else {
                             pPaymoneyOrdeDataRes = gson.fromJson(string, PPaymoneyOrdeDataRes.class);

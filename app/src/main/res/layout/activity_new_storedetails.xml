@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.myonetext.activity.NewStoredetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/store_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/re_clickBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:drawableLeft="@mipmap/dp_fh2"
+                android:text="返回"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/re_clickBack"
+                android:background="@drawable/rounded_rectangle_frame">
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:hint="店铺内商家"
+                    android:maxLines="1" />
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/icon_search" />
+            </RelativeLayout>
+            <ImageView
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/threespot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/fj_gd2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/storePicture"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/storeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/storePicture"
+                android:text="店铺名称" />
+
+            <TextView
+                android:id="@+id/GHSelf_support"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/storeName"
+                android:layout_toRightOf="@id/storePicture"
+                android:background="@color/colorAccent"
+                android:padding="5dp"
+                android:text="够惠自营" />
+
+            <TextView
+                android:id="@+id/storeCollection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="#fff"
+                android:padding="5dp"
+                android:text="411.5万人"
+                android:textColor="#000" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="13dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/Enterprise_commodity"
+            style="@style/radio_button_style"
+            android:textSize="19sp"
+            android:text="企业商品" />
+
+        <RadioButton
+            android:id="@+id/Enterprise_introduction"
+            style="@style/radio_button_style"
+            android:textSize="19sp"
+            android:text="企业简介" />
+
+        <RadioButton
+            android:id="@+id/Enterprise_dynamics"
+            style="@style/radio_button_style"
+            android:textSize="19sp"
+            android:text="企业动态" />
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/storedetailsFragmentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
+</LinearLayout>

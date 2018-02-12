@@ -1,6 +1,7 @@
 package com.example.administrator.myonetext.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class TwoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        Log.d("productData", "getCount: -------->"+productData.size());
         return productData.size() == 0 ? 0 : productData.size();
     }
 

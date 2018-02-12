@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/hhb_wk2x">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#feeebc"
+    android:textSize="15sp"
+    android:gravity="center"
+    android:paddingTop="120dp"
+    android:text="够惠商城"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#feeebc"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:text="发了一个红包，价值连城"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#feeebc"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:paddingTop="40dp"
+        android:text="惠红包"/>
+    <ImageView
+        android:id="@+id/open"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/hhb_kk2x"
+        android:paddingTop="50dp"/>
+
+</LinearLayout>

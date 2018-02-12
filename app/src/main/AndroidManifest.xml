@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.myonetext">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 连接网络权限，用于执行云端语音能力 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
@@ -14,12 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 允许程序改变网络连接状态 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <!-- 读取手机信息权限 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 读取联系人权限，上传联系人需要用到此权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!-- 外存储写权限，构建语法需要用到此权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 外存储读权限，构建语法需要用到此权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 配置权限，用来记录应用配置信息 -->
@@ -34,10 +30,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 允许程序获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 允许程序访问WiFi网络信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 允许程序读写手机状态和身份 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
@@ -47,24 +39,16 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 用于访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 用于读取手机当前的状态 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <!-- 用于申请调用A-GPS模块 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <!-- 用于扫描二维码模块 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -74,6 +58,8 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
 
     <application
         android:name=".MyApplication"
@@ -109,7 +95,46 @@
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.MapActivity" />
         <activity android:name=".activity.ChoseStartArriveCityActivity" />
-        <activity android:name=".activity.NearbyMoreActivity"></activity>
+        <activity android:name=".activity.NearbyMoreActivity" />
+        <activity android:name=".activity.SmsActivity" />
+        <activity android:name=".activity.HuiRedActivity" />
+        <activity android:name=".activity.MyQRCodeActivity" />
+        <activity android:name=".activity.MyWallentActivity" />
+        <activity android:name=".activity.MyCollectionActivity" />
+        <activity android:name=".activity.MyReceiverAdressActivity" />
+        <activity android:name=".activity.MyHuiRedActivity" />
+        <activity android:name=".activity.MyWalletActivity" />
+        <activity android:name=".activity.MySettingActivity" />
+        <activity android:name=".activity.ETBWActivity" />
+        <activity android:name=".activity.WholeActivity" />
+        <activity android:name=".activity.LoginActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.ForgetPasswordActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ProductDetailsActivity" />
+        <activity android:name=".activity.ProductLookdetails" />
+        <activity android:name=".activity.StoredetailsActivity" />
+        <activity android:name=".activity.NewStoredetailsActivity" />
+        <activity android:name=".activity.EnterpriseDynamicsActivity" />
+        <activity android:name=".activity.ShoppingCarActivity" />
+        <activity android:name=".activity.SubmitOrderActivity" />
+        <activity android:name=".activity.MyshopActivity" />
+        <activity android:name=".activity.WithdrawalsActivity" />
+        <activity android:name=".activity.UploadDataActivity" />
+        <activity android:name=".activity.RedMessageActivity"></activity>
     </application>
 
 </manifest>

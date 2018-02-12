@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/car_border">
+<TextView
+    android:id="@+id/Line_number"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#fff"
+    android:textSize="18sp"
+    android:text="建设银行"
+    android:layout_margin="15dp"/>
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:text="储蓄卡"
+            android:layout_centerInParent="true"
+            android:layout_margin="15dp"/>
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:text="卡号后四位："
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Unbind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="15dp"
+        android:text="解除绑定"
+        android:textColor="#ff0000" />
+
+</LinearLayout>

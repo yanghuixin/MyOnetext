@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.myonetext.activity.ProductDetailsActivity">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#fff"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/re_clickBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@mipmap/dp_fh2"
+            android:text="返回"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="产品详情"
+            android:textColor="#000"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <com.example.administrator.myonetext.myview.MyScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/product_details_banner"
+                android:layout_width="match_parent"
+                android:layout_height="240dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:text="￥4200"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/surplus_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/price"
+                    android:text="约剩余281（纸皮）"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                android:paddingTop="10dp"
+                android:text="易武正山 绿皮 2004年普洱茶 生茶 七子饼茶 纯料古树茶 头拔春茶 干仓茶"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <RadioGroup
+                android:visibility="gone"
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/Braised"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:text="红烧"-->
+                    <!--/>-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/Steamed"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="清蒸" />-->
+
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/minced_garlic"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="蒜蓉" />-->
+
+                <!--<RadioButton-->
+                    <!--android:id="@+id/Stir_fried"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="#000"-->
+                   <!--android:layout_weight="1"-->
+                    <!--android:text="清炒" />-->
+            </RadioGroup>
+            <TextView
+                android:id="@+id/integral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="17dp"
+                android:paddingTop="5dp"
+                android:text="可用积分：           1800"
+                android:textColor="#bebebe"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bebebe" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加数量"
+                    android:textColor="#bebebe"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/reduce"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:src="@mipmap/xq_j2x" />
+
+                <TextView
+                    android:id="@+id/number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="28dp"
+                    android:paddingRight="28dp"
+                    android:text="1"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/increase"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:src="@mipmap/xq_ja2x" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bebebe" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="产品详情"
+                    android:textColor="#bebebe"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/look_details"
+                    android:layout_width="112dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/textview_border"
+                    android:text="查看详情" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bebebe" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="再逛逛"
+                android:textColor="#bebebe"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bebebe" />
+
+            <com.example.administrator.myonetext.myview.HorizontalListView
+                android:id="@+id/moreProduce"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+        </LinearLayout>
+    </com.example.administrator.myonetext.myview.MyScrollView>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:background="#fff"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:layout_marginLeft="17dp"
+            android:id="@+id/Customer_Service"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:src="@mipmap/xq_kf2x"
+            android:text="客服" />
+
+        <ImageView
+            android:id="@+id/shop"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:src="@mipmap/xq_dp2x"
+            android:text="店铺" />
+
+        <ImageView
+            android:id="@+id/Collection"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:src="@mipmap/xq_sc2x"
+            android:text="收藏" />
+        <Button
+            android:id="@+id/add_to_car"
+            android:layout_width="112dp"
+            android:layout_height="45dp"
+            android:background="@drawable/textview_border"
+            android:text="加入购物车"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="17dp"
+            android:id="@+id/Immediately_Order"
+            android:layout_width="112dp"
+            android:layout_height="45dp"
+            android:background="@drawable/textview_border"
+            android:text="立即下单"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

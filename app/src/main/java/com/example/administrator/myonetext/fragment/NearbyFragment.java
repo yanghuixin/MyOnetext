@@ -2,7 +2,9 @@ package com.example.administrator.myonetext.fragment;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -128,6 +130,7 @@ public class NearbyFragment extends BaseFragment implements AMapLocationListener
         mlocationClient.startLocation();
     }
     //获得定位结果
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {//获得定位结果
         if (amapLocation != null) {

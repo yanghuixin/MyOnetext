@@ -9,5 +9,6 @@
     <color name="colorAutoDismissToast">#88000000</color>
     <color name="color_area">#414141</color>
     <color name="color_divider">#20000000</color>
-
+    <color name="blick">#000</color>
+    blick
 </resources>

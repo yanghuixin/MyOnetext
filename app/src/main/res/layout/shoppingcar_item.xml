@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:id="@+id/ck_chose"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="15dp"
+        android:layout_marginLeft="5dp"
+        android:button="@drawable/check_box_style"
+        android:scaleX="0.6"
+        android:scaleY="0.6" />
+
+    <RelativeLayout
+        android:id="@+id/lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ck_chose"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/picyure"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_below="@id/picyure"
+            android:layout_width="55dp"
+            android:layout_height="27dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/textview_border"
+            android:text="删除" />
+
+        <RadioButton
+            android:id="@+id/collection"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/delete"
+            android:layout_below="@id/picyure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableLeft="@drawable/collcetion"
+            android:text="收藏"
+            android:textColor="#000" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_toRightOf="@id/lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/storname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="aaaaaaaaaaaaa"
+          android:textSize="15sp"
+            />
+        <TextView
+            android:layout_below="@id/storname"
+            android:id="@+id/productname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:layout_below="@id/productname"
+            android:id="@+id/productprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="￥460.00"
+            android:textSize="18sp"
+            />
+        <LinearLayout
+            android:layout_below="@id/productname"
+            android:layout_toRightOf="@id/productprice"
+            android:id="@+id/rl_edit"
+            android:layout_width="120dp"
+            android:background="#e0e0e0"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                android:id="@+id/iv_sub"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000"
+                android:background="@drawable/textview_border"
+                android:layout_height="match_parent"
+                android:text=" - " />
+
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/textview_border"
+                android:layout_height="match_parent"
+                android:text="1"
+                />
+
+            <TextView
+                android:id="@+id/iv_add"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/textview_border"
+                android:layout_height="match_parent"
+                android:text=" + " />
+        </LinearLayout>
+        <TextView
+            android:padding="5dp"
+            android:layout_below="@id/rl_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Subtotal"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:text="小计：￥460.00"/>
+    </RelativeLayout>
+</RelativeLayout>

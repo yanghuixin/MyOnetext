@@ -13,7 +13,6 @@ import com.example.administrator.myonetext.R;
  * 自定义吐司
  * 用户多次点击，自动显示最新吐司内容
  */
-
 public class CustomToast {
     private static Toast mToast;
     private static TextView mTvToast;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<com.youth.banner.Banner
+    android:id="@+id/storeBanner"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"></com.youth.banner.Banner>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/smartRefresh"
+        >
+    <com.example.administrator.myonetext.myview.MyGridView
+        android:layout_marginTop="5dp"
+        android:id="@+id/storehomefragment_gradeview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></com.example.administrator.myonetext.myview.MyGridView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

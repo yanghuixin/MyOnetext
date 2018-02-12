@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.myonetext.activity.SubmitOrderActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#fff"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/re_clickBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@mipmap/dp_fh2"
+            android:text="返回"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="订单配送至"
+            android:textColor="#000"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/threespot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/fj_gd2" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0" />
+
+    <TextView
+        android:id="@+id/adress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="15dp"
+        android:text="配送地址： 北京市辖区 丰台泥洼路周庄子家园4号楼1单元2402"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#e0e0e0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="32dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/Distribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="配送"
+                android:textColor="#000"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/toStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="100dp"
+                android:text="到店"
+                android:textColor="#000"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <EditText
+            android:visibility="gone"
+            android:id="@+id/Table_number"
+            android:layout_width="97dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/textview_border"
+            android:hint="填写号桌"
+            android:textColorHint="#e0e0e0"
+            android:textColor="#000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#e0e0e0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/Now_arrived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="抵现"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/money"
+            android:layout_width="97dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/textview_border"
+            android:text="惠红包￥2136"
+            android:textColor="#000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#e0e0e0" />
+
+    <ListView
+        android:id="@+id/my_order"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp">
+
+        <TextView
+            android:id="@+id/payM"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="32dp"
+            android:text="￥7.00（已优惠￥0）"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/submit_order"
+            android:layout_width="144dp"
+            android:layout_height="63dp"
+            android:layout_alignParentRight="true"
+            android:background="#ae00ae"
+            android:text="提交订单"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</LinearLayout>

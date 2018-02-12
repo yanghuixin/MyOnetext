@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.myonetext.activity.ShoppingCarActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#fff"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/re_clickBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@mipmap/dp_fh2"
+            android:text="返回"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="购物车"
+            android:textColor="#000"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/threespot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/fj_gd2" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:background="#fff">
+
+        <Button
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/shoppingCar_home"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:drawableTop="@mipmap/s2x"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="#000" />
+
+        <Button
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/shoppingCar_seckkill"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:drawableTop="@mipmap/h2x"
+            android:gravity="center"
+            android:text="秒杀"
+            android:textColor="#000" />
+
+        <Button
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/shoppingCar_businessMore"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:drawableTop="@mipmap/sh2x"
+            android:gravity="center"
+            android:text="商家更多"
+            android:textColor="#000" />
+
+        <Button
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/shoppingCar_more"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:drawableTop="@mipmap/g2x"
+            android:gravity="center"
+            android:text="更多"
+            android:textColor="#000" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0e0" />
+    <ListView
+        android:id="@+id/list_shopping_cart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"></ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0e0" />
+
+    <LinearLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff">
+
+        <CheckBox
+            android:id="@+id/ck_all"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:button="@drawable/check_box_style"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_show_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="全选 合计:￥0.00"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/tv_all_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="总额:￥0.00"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/tv_settlement"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#000"
+            android:gravity="center"
+            android:text="结算(0)"
+            android:textColor="#fff" />
+    </LinearLayout>
+</LinearLayout>

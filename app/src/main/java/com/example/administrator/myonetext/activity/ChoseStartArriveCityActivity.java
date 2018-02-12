@@ -160,7 +160,6 @@ public class ChoseStartArriveCityActivity extends AppCompatActivity {
             }.getType());
         } catch (Exception e) {
         }
-
         for (int i = 0; i < 7; i++) {
             city1.add(allCities.get(i));
         }

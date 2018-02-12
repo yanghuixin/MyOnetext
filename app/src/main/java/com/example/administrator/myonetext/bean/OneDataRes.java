@@ -8,20 +8,19 @@ import java.util.List;
 //stor
 public class OneDataRes {
 
-
     /**
      * Status : 1
-     * Msg : [{"bid":1044,"bname":"宏辉茶业","blogopic":"http://img1.tealg.com/Brand/201509/6ab77d1d-23de-43a3-9d1e-e03365098363.jpg","pingfen":10,"plcnt":57,"baddress":"北京西城区马连道14号京华茶叶大世界2楼2-48号","bmap":"100.199556,25.91351"},{"bid":609,"bname":"京华","blogopic":"http://img1.tealg.com/Brand/201510/f67276ad-e236-4776-ae87-f09b57c091d5.jpg","pingfen":10,"plcnt":0,"baddress":"北京市西城区广安门外马连道14号","bmap":"116.333425,39.886665"},{"bid":1045,"bname":"老北京茶园","blogopic":"http://img1.tealg.com/Brand/201509/72e97818-b9db-41b4-8e93-0b9b3fe16f47.jpg","pingfen":10,"plcnt":55,"baddress":"北京市西城区马连道路12号（北京青溪茶叶市场中心B5号）","bmap":"100.259325,25.610889"},{"bid":604,"bname":"中茶世界茶园","blogopic":"http://img1.tealg.com/Brand/201501/f4046cda-30fd-4168-b6ee-afbe303136c7.jpg","pingfen":10,"plcnt":0,"baddress":"朝阳区望京六佰本商业街北区A13a","bmap":"116.473251,40.01515"}]
+     * Msg : [{"bid":11808,"bname":"钦州海鸭蛋","blogopic":"http://img1.tealg.com/Brand/201801/9474cfdb-f002-437f-b505-2372f649c581.jpg","pingfen":10,"plcnt":1,"baddress":" 广西省钦州市北部湾","bmap":"109.096258,21.489808","bts":"海鸭蛋"},{"bid":416,"bname":"大德盛","blogopic":"http://img1.tealg.com/Brand/201510/6ef3e825-2fad-45fc-a7d3-1f065871fa2a.jpg","pingfen":9.71,"plcnt":9,"baddress":"北京市西城区马连道路14号大德盛茶城1-","bmap":"116.333478,39.8859","bts":"普洱茶"},{"bid":11609,"bname":"源味祥北京","blogopic":"http://img1.tealg.com/Brand/201801/93c94d57-baa2-4465-b949-2f31401b7823.jpg","pingfen":10,"plcnt":0,"baddress":"同上","bmap":"116.333487,39.886117","bts":"普洱茶"},{"bid":11802,"bname":"海南水果","blogopic":"http://img1.tealg.com/Brand/201801/9d58c65a-f557-46ed-b137-bd7572c164be.jpg","pingfen":10,"plcnt":0,"baddress":"河南省南阳市","bmap":"116.059216,40.372698","bts":"火龙果    百香果"}]
      */
 
-    private int Status;
+    private String  Status;
     private List<MsgBean> Msg;
 
-    public int getStatus() {
+    public String getStatus() {
         return Status;
     }
 
-    public void setStatus(int Status) {
+    public void setStatus(String Status) {
         this.Status = Status;
     }
 
@@ -35,22 +34,24 @@ public class OneDataRes {
 
     public static class MsgBean {
         /**
-         * bid : 1044
-         * bname : 宏辉茶业
-         * blogopic : http://img1.tealg.com/Brand/201509/6ab77d1d-23de-43a3-9d1e-e03365098363.jpg
+         * bid : 11808
+         * bname : 钦州海鸭蛋
+         * blogopic : http://img1.tealg.com/Brand/201801/9474cfdb-f002-437f-b505-2372f649c581.jpg
          * pingfen : 10
-         * plcnt : 57
-         * baddress : 北京西城区马连道14号京华茶叶大世界2楼2-48号
-         * bmap : 100.199556,25.91351
+         * plcnt : 1
+         * baddress :  广西省钦州市北部湾
+         * bmap : 109.096258,21.489808
+         * bts : 海鸭蛋
          */
 
         private int bid;
         private String bname;
         private String blogopic;
-        private int pingfen;
+        private double pingfen;
         private int plcnt;
         private String baddress;
         private String bmap;
+        private String bts;
 
         public int getBid() {
             return bid;
@@ -76,11 +77,11 @@ public class OneDataRes {
             this.blogopic = blogopic;
         }
 
-        public int getPingfen() {
+        public double getPingfen() {
             return pingfen;
         }
 
-        public void setPingfen(int pingfen) {
+        public void setPingfen(double pingfen) {
             this.pingfen = pingfen;
         }
 
@@ -106,6 +107,14 @@ public class OneDataRes {
 
         public void setBmap(String bmap) {
             this.bmap = bmap;
+        }
+
+        public String getBts() {
+            return bts;
+        }
+
+        public void setBts(String bts) {
+            this.bts = bts;
         }
     }
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    tools:context="com.example.administrator.myonetext.activity.ETBWActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#fff"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/re_clickBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@mipmap/dp_fh2"
+            android:text="返回"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <!--搜索布局-->
+        <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/rounded_rectangle_frame"
+           android:layout_marginRight="8dp"
+            android:paddingTop="3dp">
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/icon_search" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_search"
+                android:background="@null"
+                android:hint="输入商家名、品类或商圈"
+                android:maxLines="1" />
+
+            <ImageView
+                android:id="@+id/voice"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/et_search"
+                android:background="@mipmap/ssyy3x" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refreshLayout"
+        >
+        <com.example.administrator.myonetext.myview.MyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/ly_head">
+                <com.example.administrator.myonetext.myview.MyListView
+                    android:id="@+id/list1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#6c6c6c" />
+
+                <TextView
+                    android:id="@+id/more2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="right"
+                    android:text="更多" />
+
+                <com.youth.banner.Banner
+                    android:id="@+id/nearby_fragment_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+                <com.example.administrator.myonetext.myview.MyListView
+                    android:id="@+id/list2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </com.example.administrator.myonetext.myview.MyScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

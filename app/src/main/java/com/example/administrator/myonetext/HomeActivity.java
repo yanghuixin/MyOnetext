@@ -1,5 +1,6 @@
 package com.example.administrator.myonetext;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     private ScanFragment scanFragment;
     private OrderFragment orderFragment;
     private MyFragment myFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+
     @OnClick({R.id.home, R.id.nearby, R.id.scan, R.id.order, R.id.my})
     public void onViewClicked(View view) {
         manager = getSupportFragmentManager();
@@ -126,4 +129,18 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    //////////////////////////////////////////
+    @Override
+    protected void onNewIntent(Intent intent) {
+        // TODO Auto-generated method stub
+        super.onNewIntent(intent);
+        int id = intent.getIntExtra("id", 0);
+        if (id == 1) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            HomeFragment honeFragment = new HomeFragment();
+            ft.replace(R.id.fragment, honeFragment);
+            ft.commit();
+        }
+    }
 }

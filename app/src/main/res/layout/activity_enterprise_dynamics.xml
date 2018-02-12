@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_enterprise_dynamics"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ android:orientation="vertical"
+    tools:context="com.example.administrator.myonetext.activity.EnterpriseDynamicsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#fff"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/re_clickBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@mipmap/dp_fh2"
+            android:text="返回"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="企业动态"
+            android:textColor="#000"
+            android:textSize="20dp" />
+    </RelativeLayout>
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+     <TextView
+         android:layout_marginTop="15dp"
+         android:layout_marginBottom="15dp"
+         android:id="@+id/title"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="2018年元旦放假通知"
+         android:textSize="18sp"
+         android:layout_marginLeft="20dp"
+         />
+     <TextView
+         android:layout_marginBottom="15dp"
+         android:paddingLeft="20dp"
+         android:paddingRight="50dp"
+         android:id="@+id/time"
+         android:layout_below="@id/title"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="15sp"
+         android:text="日期：2017-12-29  18:35"
+         />
+     <TextView
+         android:id="@+id/author"
+         android:layout_marginBottom="15dp"
+         android:layout_toRightOf="@id/time"
+         android:layout_below="@+id/title"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="15sp"
+         android:text="作者：測試"/>
+ </RelativeLayout>
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="454dp"
+        android:layout_height="290dp"
+        android:padding="10dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:padding="20dp"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"/>
+</LinearLayout>

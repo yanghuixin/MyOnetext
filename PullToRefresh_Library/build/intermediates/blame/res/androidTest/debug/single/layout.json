@@ -4,6 +4,10 @@
         "source": "E:\\ChaHeTiaanXia\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
+        "merged": "D:\\Android\\project\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "D:\\Android\\project\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\AndroidStudioProjects\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "C:\\Users\\Administrator\\AndroidStudioProjects\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
@@ -14,5 +18,9 @@
     {
         "merged": "C:\\Users\\Administrator\\AndroidStudioProjects\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
         "source": "C:\\Users\\Administrator\\AndroidStudioProjects\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "D:\\Android\\project\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\Android\\project\\MyOnetext\\PullToRefresh_Library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     }
 ]

@@ -11,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.administrator.myonetext.R;
 import com.example.administrator.myonetext.activity.NearbyMoreActivity;
+import com.example.administrator.myonetext.activity.NewStoredetailsActivity;
+import com.example.administrator.myonetext.activity.ProductDetailsActivity;
 import com.example.administrator.myonetext.adapter.NearbyProductAdapter;
 import com.example.administrator.myonetext.adapter.NearbyStroeAdapter;
 import com.example.administrator.myonetext.bean.BannerDataRes;
@@ -128,7 +131,7 @@ public class TwoNearbyFragment extends BaseFragment implements OnBannerListener 
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         initBannerData(284);//{ "Status":"0","Msg":}
-        initstorData("cjy", wdpt, jdpt);
+       // initstorData("cjy", wdpt, jdpt);
         initSmartRefresh(view);
         adapter = new NearbyStroeAdapter(getActivity(), storData);
         listView1.setAdapter(adapter);
@@ -146,7 +149,30 @@ public class TwoNearbyFragment extends BaseFragment implements OnBannerListener 
                 return false;
             }
         });
+        initItemOnClick();
         return view;
+    }
+    private void initItemOnClick() {
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent1 = new Intent();
+                //      intent1.setClass(getActivity(), StoredetailsActivity.class);
+                intent1.setClass(getActivity(), NewStoredetailsActivity.class);
+                int bid = storData.get(position).getBid();
+                intent1.putExtra("bid", bid + "");
+                startActivity(intent1);
+            }
+        });
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                int pid = productData.get(position).getPid();
+                intent.putExtra("pid", pid + "");
+                startActivity(intent);
+            }
+        });
     }
     private void initSmartRefresh(View view) {
         //设置 Header 为 Material样式
@@ -157,6 +183,7 @@ public class TwoNearbyFragment extends BaseFragment implements OnBannerListener 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 initstorData("ms",wdpt,jdpt);
+                Log.d("onEvent1", "----------------------------->" + jdpt + "he--------------->" + wdpt);
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
@@ -173,13 +200,14 @@ public class TwoNearbyFragment extends BaseFragment implements OnBannerListener 
     public void onEventMainThread(LALMessageEvent event) {
         jdpt = event.getJdpt();
         wdpt = event.getWdpt();
-        Log.d("onEvent", "----------------------------->" + jdpt + "--------------->" + wdpt);
+        Log.d("onEvent1", "----------------------------->" + jdpt + "--------------->" + wdpt);
+        initstorData("cjy", wdpt, jdpt);
     }
 
     private void initstorData(String type, String wdpt, String jdpt) {
-        //  String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+pagei+"&pageSize=4&pcid=0&type="+type+"&wdpt="+wdpt+"&jdpt="+jdpt;
-
-        String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page=1&pageSize=4&pcid=0&type=cjy&wdpt=39.892138&jdpt=116.323148";
+         String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page="+pagei+"&pageSize=4&pcid=0&type="+type+"&wdpt="+wdpt+"&jdpt="+jdpt;
+        Log.d("onEvent1", "initstorData: -------------------->"+wdpt+"和"+jdpt);
+       // String nearbyMs = "http://app.tealg.com/api/app/Business.ashx?flag=mapbusiness&page=1&pageSize=4&pcid=0&type=cjy&wdpt=39.892138&jdpt=116.323148";
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request.Builder requestBuilder = new Request.Builder().url(nearbyMs);
         //可以省略，默认是GET请求
@@ -248,7 +276,6 @@ public class TwoNearbyFragment extends BaseFragment implements OnBannerListener 
                     String string = response.body().string();
                     Log.d("string", "产品onResponse:--------------------------> " + string);
                     nearbyProductDataRes = gson.fromJson(string, NearbyProductDataRes.class);
-
                     Message message = new Message();
                     message.what = INIT_PRODUCT_DATE;
                     handler.sendMessage(message);
